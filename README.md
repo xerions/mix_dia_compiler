@@ -1,4 +1,4 @@
-# MixDiaCompiler
+# MixDiaCompiler [![Build Status](https://travis-ci.org/xerions/mix_dia_compiler.svg?branch=master)](https://travis-ci.org/xerions/mix_dia_compiler)
 
 A Diameter source files compiler for mix. It was inspired by `rebar_dia_compiler` and it should work the same way expect `dia_first_files option`.
 
