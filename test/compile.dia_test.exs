@@ -41,7 +41,7 @@ defmodule Mix.Tasks.Compile.DiaTest do
       assert Mix.Tasks.Compile.Dia.run([]) == :ok
 
       assert File.regular?("src/a.erl")
-      assert File.regular?("include/a.hrl")
+      assert File.regular?("_build/test/lib/sample/include/a.hrl")
       assert File.regular?("_build/test/lib/sample/ebin/a.beam")
       stat0 = File.stat! "_build/test/lib/sample/ebin/a.beam"
       
@@ -77,9 +77,9 @@ defmodule Mix.Tasks.Compile.DiaTest do
       assert Mix.Tasks.Compile.Dia.run([]) == :ok
 
       assert File.regular?("src/a.erl")
-      assert File.regular?("include/a.hrl")
+      assert File.regular?("_build/test/lib/sample/include/a.hrl")
       assert File.regular?("src/b.erl")
-      assert File.regular?("include/b.hrl")
+      assert File.regular?("_build/test/lib/sample/include/b.hrl")
       assert File.regular?("_build/test/lib/sample/ebin/a.beam")
       assert File.regular?("_build/test/lib/sample/ebin/b.beam")
     end

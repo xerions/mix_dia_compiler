@@ -40,11 +40,12 @@ defmodule Mix.Tasks.Compile.Dia do
     Erlang.compile(manifest(), mappings, :dia, :erl, [], fn
       input, output ->
         :ok = Filelib.ensure_dir(output)
-        :ok = Path.join("include", "dummy.hrl") |> Filelib.ensure_dir
+        app_path = Mix.Project.app_path(project)
+        include_path = to_char_list Path.join(app_path, project[:erlc_include_path])
+        :ok = Path.join(include_path, "dummy.hrl") |> Filelib.ensure_dir
         case DiaDictUtil.parse({:path, input}, []) do
           {:ok, spec} ->
             filename = dia_filename(input, spec)
-            include_path = to_char_list project[:erlc_include_path]
             _ = DiaCodegen.from_dict(filename, spec, [{:outdir, 'src'} | options], :erl)
             _ = DiaCodegen.from_dict(filename, spec, [{:outdir, include_path} | options], :hrl)
             file = to_char_list Path.join("src", filename)
