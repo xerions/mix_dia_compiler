@@ -55,6 +55,25 @@ defmodule Mix.Tasks.Compile.DiaTest do
     end
   end
 
+  test "compilation success with inherits from diameter" do
+    in_fixture "compile_dia", fn ->
+      File.write! "dia/a.dia", """
+      @id     0
+      @name   a
+      @vendor 1 ABC
+      @inherits diameter_gen_base_rfc6733
+      @avp_types
+         IMSI 1 UTF8String V
+      """
+
+      assert Mix.Tasks.Compile.Dia.run([]) == :ok
+
+      assert File.regular?("src/a.erl")
+      assert File.regular?("_build/test/lib/sample/include/a.hrl")
+      assert File.regular?("_build/test/lib/sample/ebin/a.beam")
+    end
+  end
+
   test "compilation success with file order" do
     in_fixture "compile_dia", fn ->
       File.write! "dia/1.dia", """
