@@ -38,7 +38,7 @@ defmodule Mix.Tasks.Compile.DiaTest do
       -module(zzz).
       """
 
-      assert Mix.Tasks.Compile.Dia.run([]) == :ok
+      assert Mix.Tasks.Compile.Dia.run([]) == {:ok, []}
 
       assert File.regular?("src/a.erl")
       assert File.regular?("_build/test/lib/sample/include/a.hrl")
@@ -48,7 +48,7 @@ defmodule Mix.Tasks.Compile.DiaTest do
       # just dia files should be compiled
       assert not File.regular?("_build/test/lib/sample/ebin/zzz.beam")
 
-      assert Mix.Tasks.Compile.Erlang.run([]) == :ok
+      assert Mix.Tasks.Compile.Erlang.run([]) == {:ok, []}
       assert File.regular?("_build/test/lib/sample/ebin/zzz.beam")
       assert File.regular?("_build/test/lib/sample/ebin/a.beam")
       assert stat0 == File.stat! "_build/test/lib/sample/ebin/a.beam"
@@ -66,7 +66,7 @@ defmodule Mix.Tasks.Compile.DiaTest do
          IMSI 1 UTF8String V
       """
 
-      assert Mix.Tasks.Compile.Dia.run([]) == :ok
+      assert Mix.Tasks.Compile.Dia.run([]) == {:ok, []}
 
       assert File.regular?("src/a.erl")
       assert File.regular?("_build/test/lib/sample/include/a.hrl")
@@ -93,7 +93,7 @@ defmodule Mix.Tasks.Compile.DiaTest do
          IMEIV 900 OctetString MV
       """
 
-      assert Mix.Tasks.Compile.Dia.run([]) == :ok
+      assert Mix.Tasks.Compile.Dia.run([]) == {:ok, []}
 
       assert File.regular?("src/a.erl")
       assert File.regular?("_build/test/lib/sample/include/a.hrl")
