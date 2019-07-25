@@ -25,6 +25,15 @@ defmodule Mix.Tasks.Compile.Dia do
       For a list of the many more available options,
       see [`:diameter_make`](http://erlang.org/doc/man/diameter_make.html).
       Note that the `:outdir` option is overridden by this compiler.
+
+    * `:dia_erl_compile_opts` list of options that will be passed to
+      Mix.Compilers.Erlang.compile/6
+
+      Following options are supported:
+
+        * :force        - boolean
+        * :verbose      - boolean
+        * :all_warnings - boolean
   """
 
   @doc """
@@ -33,11 +42,12 @@ defmodule Mix.Tasks.Compile.Dia do
   @spec run(OptionParser.argv) :: :ok | :noop
   def run(_args) do
     project      = Mix.Project.config
+    erlang_compile_opts = project[:dia_erl_compile_opts] || []
     source_paths = project[:erlc_paths]
     mappings     = Enum.zip(["dia"], source_paths)
     options      = project[:dia_options] || []
 
-    Erlang.compile(manifest(), mappings, :dia, :erl, [], fn
+    Erlang.compile(manifest(), mappings, :dia, :erl, erlang_compile_opts, fn
       input, output ->
         :ok = Filelib.ensure_dir(output)
         app_path = Mix.Project.app_path(project)
