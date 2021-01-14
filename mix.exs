@@ -9,6 +9,7 @@ defmodule MixDiaCompiler.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps(),
      description: description(),
+     xref: [exclude: [:diameter_codegen, :diameter_dict_util]],
      package: package()]
   end
 
