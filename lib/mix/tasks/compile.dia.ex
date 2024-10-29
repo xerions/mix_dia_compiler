@@ -56,7 +56,7 @@ defmodule Mix.Tasks.Compile.Dia do
         case DiaDictUtil.parse({:path, input}, []) do
           {:ok, spec} ->
             filename = dia_filename(input, spec)
-            _ = DiaCodegen.from_dict(filename, spec, [{:outdir, 'src'} | options], :erl)
+            _ = DiaCodegen.from_dict(filename, spec, [{:outdir, ~c"src"} | options], :erl)
             _ = DiaCodegen.from_dict(filename, spec, [{:outdir, include_path} | options], :hrl)
             file = to_charlist(Path.join("src", filename))
             compile_path = to_charlist Mix.Project.compile_path(project)
